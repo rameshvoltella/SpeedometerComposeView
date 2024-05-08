@@ -68,5 +68,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation(project(":SpeedometerComposeLibrary"))
 //    implementation("com.github.rameshvoltella:SpeedometerComposeView:1.0.0")
-
+//[![](https://jitpack.io/v/rameshvoltella/SpeedometerComposeView.svg)](https://jitpack.io/#rameshvoltella/SpeedometerComposeView)
 }

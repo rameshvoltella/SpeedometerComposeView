@@ -283,7 +283,7 @@ fun seekPercentage(rangeValue: Int, rangeMaxValue: Int, seekBarMaxValue: Int): I
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun SpeedPreview() {
 
     val totalValue = 800
 
