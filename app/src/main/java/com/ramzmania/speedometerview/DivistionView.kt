@@ -28,7 +28,7 @@ fun SpeedometerUiViewCompose() {
 
 
     var targetValue by remember { mutableStateOf(0f) }
-    var currentSpeed = remember(targetValue) { Animatable(initialValue = 60f) }
+    var currentSpeed = remember(targetValue) { Animatable(initialValue = 200f) }
 
 
 

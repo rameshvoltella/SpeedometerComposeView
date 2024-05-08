@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.Path
@@ -54,6 +55,11 @@ fun SpeedometerComposeView(
     speedTextColor: Color = Color.Black,
     movingSpeedTextColor: Color = Color.Black
 ) {
+    val gradient = Brush.radialGradient(
+        listOf(Color.Red.copy(.3f), Color.Red, Color.Red.copy(.3f)),
+        center = Offset(300f,300f),
+        radius = 500f
+    )
 
     // Constants for drawing the speedometer
     val arcDegrees = 275  //The total degrees of the arc that represents the entire range of the speedometer. It's set to 275, meaning the speedometer arc spans 275 degrees.
@@ -101,6 +107,8 @@ fun SpeedometerComposeView(
                 }
                 val centerArcSize = Size(w *0.9f, h *0.9f)
                 val centerArcStroke = Stroke(20f, 0f, StrokeCap.Round)
+                val centerArcStroke2 = Stroke(40f, 0f, StrokeCap.Round)
+
                 // Draw the background arc
                 drawArc(
                     secondaryColor,
@@ -122,13 +130,31 @@ fun SpeedometerComposeView(
                     size = centerArcSize,
                     style = centerArcStroke
                 )
+                drawArc(
+                    gradient,
+                    startArcAngle,
+                    (degreesMarkerStep * progress).toFloat(),
+                    false,
+                    topLeft = quarterOffset,
+                    size = centerArcSize,
+                    style = centerArcStroke2
+                )
+                drawArc(
+                    Color.White,
+                    startArcAngle,
+                    (degreesMarkerStep * progress).toFloat(),
+                    false,
+                    topLeft = quarterOffset,
+                    size = centerArcSize,
+                    style = centerArcStroke
+                )
 
                 // Draw circles for the center and needle
-                drawCircle(mainColor, 50f, centerOffset)
-                drawCircle(Color.White, 25f, centerOffset)
-                drawCircle(needleColor, 20f, centerOffset)
-
-                // Draw markers and their text the 55 marker points
+//                drawCircle(mainColor, 50f, centerOffset)
+//                drawCircle(Color.White, 25f, centerOffset)
+//                drawCircle(needleColor, 20f, centerOffset)
+//
+//                // Draw markers and their text the 55 marker points
                 var counterPoint=0
                 for ((counter, degrees) in (startStepAngle..(startStepAngle + arcDegrees) step degreesMarkerStep).withIndex()) {
                     val lineEndX = 100f
