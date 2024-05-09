@@ -28,7 +28,7 @@ fun SpeedometerUiViewCompose() {
 
 
     var targetValue by remember { mutableStateOf(0f) }
-    var currentSpeed = remember(targetValue) { Animatable(initialValue = 50f) }
+    var currentSpeed = remember(targetValue) { Animatable(initialValue = 80f) }
 
 
 
@@ -40,7 +40,7 @@ fun SpeedometerUiViewCompose() {
                 .fillMaxHeight()
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
-                .background(color = colorResource(id = R.color.white))
+                .background(color = colorResource(id = R.color.background_blue))
         ) {
             Box(
                 modifier = Modifier

@@ -11,9 +11,11 @@ import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -27,6 +29,8 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.rotate
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 /**
 * Composable function to render a speedometer view.
@@ -58,7 +62,9 @@ fun SpeedometerComposeView(
     movingSpeedTextColor: Color = Color.Black,
     speedFont: Typeface? = null,
     arcWidth:Float=20f,
-    gradientArc:Boolean=false// Default value is null
+    gradientArc:Boolean=false,
+    glowColor: Color = Color.White.copy(alpha = 0.5f), // Adjust alpha to control glow intensity
+    glowBlurRadius: Dp = 16.dp // Adjust blur radius for glow effect// Default value is null
 ) {
     val gradient = Brush.radialGradient(
         listOf(Color.Red.copy(.3f), Color.Red, Color.Red.copy(.3f)),
@@ -110,6 +116,9 @@ fun SpeedometerComposeView(
                 val paint = Paint().apply {
                     color = mainColor
                 }
+                val paintGlow = Paint().apply {
+                    color = mainColor
+                }
                 val centerArcSize = Size(w *0.9f, h *0.9f)
                 val centerArcStroke = Stroke(arcWidth, 0f, StrokeCap.Round)
                 val centerArcStroke3 = Stroke(arcWidth+10f, 0f, StrokeCap.Round)
@@ -151,16 +160,28 @@ fun SpeedometerComposeView(
                     )
                 }else
                 {
-                    drawArc(
-                        mainColor,
-                        startArcAngle,
-                        (degreesMarkerStep * progress).toFloat(),
-                        false,
-                        topLeft = quarterOffset,
-                        size = centerArcSize,
-                        style = centerArcStroke3,
-                        alpha = 0.3f
-                    )
+//                    drawArc(
+//                        mainColor,
+//                        startArcAngle,
+//                        (degreesMarkerStep * progress).toFloat(),
+//                        false,
+//                        topLeft = quarterOffset,
+//                        size = centerArcSize,
+//                        style = centerArcStroke3,
+//                        alpha = 0.3f
+//                    )
+
+                    val frameworkPaint = paintGlow.asFrameworkPaint()
+                    frameworkPaint.style = android.graphics.Paint.Style.STROKE
+                    frameworkPaint.color = mainColor.toArgb()
+                    frameworkPaint.strokeWidth = arcWidth
+                    frameworkPaint.strokeCap = android.graphics.Paint.Cap.ROUND
+                    //this is not in skia paint
+                    frameworkPaint.setShadowLayer(28f,0f,0f, mainColor.toArgb())
+                    val width = centerArcSize.width
+                    val height = centerArcSize.height
+                    val rect = Rect(left = w / 20f, top = h / 20f, right = w / 20f + width, bottom = h / 20f + height)
+                    canvas.drawArc(rect = rect,startArcAngle,(degreesMarkerStep * progress).toFloat(),false,paintGlow)
                     drawArc(
                         mainColor,
                         startArcAngle,
@@ -170,7 +191,6 @@ fun SpeedometerComposeView(
                         size = centerArcSize,
                         style = centerArcStroke
                     )
-
 //                    drawArc(
 //                        brush = Brush.verticalGradient(listOf(Color.Red, Color.Green, Color.Blue)),
 //                        startArcAngle,
@@ -378,5 +398,32 @@ fun SpeedPreview() {
     val totalValue = 800
 
     SpeedometerComposeView(currentSpeedValue = 363, speedMeterMaxRange = totalValue)
+
+}
+
+@Composable
+fun GlowCircle() {
+
+    Canvas(
+        modifier = Modifier.size(120.dp),
+        onDraw = {
+
+            val center = size.minDimension / 2f
+
+            val paint = Paint()
+            val frameworkPaint = paint.asFrameworkPaint()
+            frameworkPaint.style = android.graphics.Paint.Style.STROKE
+            frameworkPaint.color = 200
+            frameworkPaint.strokeWidth = 8f
+
+            //this is not in skia paint
+            frameworkPaint.setShadowLayer(28f,0f,0f, 200)
+
+            drawIntoCanvas {
+                it.drawCircle(center = Offset(center,center), radius = center - 30f, paint = paint)
+            }
+
+        }
+    )
 
 }
