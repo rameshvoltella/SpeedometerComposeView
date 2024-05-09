@@ -6,6 +6,7 @@ package com.ramzmania.speedometercomposeview
  * Date: 08/06/2024
  * Description: This code provides a custom Composable function to render a speedometer view using Jetpack Compose.
  */
+import android.graphics.Typeface
 import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.aspectRatio
@@ -17,6 +18,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -53,7 +55,10 @@ fun SpeedometerComposeView(
     endColorRangeSecondary: Color = Color(0xFFC8E6C9),
     needleColor: Color = Color.Black,
     speedTextColor: Color = Color.Black,
-    movingSpeedTextColor: Color = Color.Black
+    movingSpeedTextColor: Color = Color.Black,
+    speedFont: Typeface? = null,
+    arcWidth:Float=20f,
+    gradientArc:Boolean=false// Default value is null
 ) {
     val gradient = Brush.radialGradient(
         listOf(Color.Red.copy(.3f), Color.Red, Color.Red.copy(.3f)),
@@ -106,8 +111,8 @@ fun SpeedometerComposeView(
                     color = mainColor
                 }
                 val centerArcSize = Size(w *0.9f, h *0.9f)
-                val centerArcStroke = Stroke(20f, 0f, StrokeCap.Round)
-                val centerArcStroke2 = Stroke(40f, 0f, StrokeCap.Round)
+                val centerArcStroke = Stroke(arcWidth, 0f, StrokeCap.Round)
+                val centerGradientArcStroke = Stroke(arcWidth-(arcWidth/2), 0f, StrokeCap.Round)
 
                 // Draw the background arc
                 drawArc(
@@ -121,38 +126,75 @@ fun SpeedometerComposeView(
                 )
 
                 // Draw the progress arc
-                drawArc(
-                    mainColor,
-                    startArcAngle,
-                    (degreesMarkerStep * progress).toFloat(),
-                    false,
-                    topLeft = quarterOffset,
-                    size = centerArcSize,
-                    style = centerArcStroke
-                )
-                drawArc(
-                    gradient,
-                    startArcAngle,
-                    (degreesMarkerStep * progress).toFloat(),
-                    false,
-                    topLeft = quarterOffset,
-                    size = centerArcSize,
-                    style = centerArcStroke2
-                )
-                drawArc(
-                    Color.White,
-                    startArcAngle,
-                    (degreesMarkerStep * progress).toFloat(),
-                    false,
-                    topLeft = quarterOffset,
-                    size = centerArcSize,
-                    style = centerArcStroke
+
+                if(gradientArc)
+                {
+                    drawArc(
+                        gradient,
+                        startArcAngle,
+                        (degreesMarkerStep * progress).toFloat(),
+                        false,
+                        topLeft = quarterOffset,
+                        size = centerArcSize,
+                        style = centerArcStroke
+                    )
+                    drawArc(
+                        Color.White,
+                        startArcAngle,
+                        (degreesMarkerStep * progress).toFloat(),
+                        false,
+                        topLeft = quarterOffset,
+                        size = centerArcSize,
+                        style = centerGradientArcStroke
+                    )
+                }else
+                {
+                    drawArc(
+                        mainColor,
+                        startArcAngle,
+                        (degreesMarkerStep * progress).toFloat(),
+                        false,
+                        topLeft = quarterOffset,
+                        size = centerArcSize,
+                        style = centerArcStroke
+                    )
+                }
+
+
+  /*              val neonGlowColors = listOf(
+                    Color(0xFF00FF00), // Green
+                    Color(0xFF00FFFF), // Cyan
+                    Color(0xFFFF00FF), // Magenta
+                    Color(0xFFFF0000), // Red
+                    Color(0xFFFFFF00)  // Yellow
                 )
 
+// Draw neon glow effect
+                val glowRadius = 20f // Adjust the radius of the glow
+                val glowOpacity = 0.2f // Adjust the opacity of the glow
+                for ((index, color) in neonGlowColors.withIndex()) {
+                    val glowPaint = Paint().apply {
+                        this.color = color.copy(alpha = glowOpacity)
+                        style = PaintingStyle.Stroke
+                        strokeWidth = centerArcStroke2.width * 2 // Adjust the width of the glow arc
+                        alpha = (255 * (1 - index * 0.2)).toFloat() // Adjust the alpha of each glow arc
+                    }
+                    drawArc(
+                        color = glowPaint.color,
+                        startAngle = startArcAngle,
+                        sweepAngle = (degreesMarkerStep * progress).toFloat(),
+                        useCenter = false,
+                        topLeft = quarterOffset,
+                        size = centerArcSize,
+                        style = centerArcStroke2,
+                        alpha = glowPaint.alpha
+                    )
+                }*/
+
                 // Draw circles for the center and needle
-//                drawCircle(mainColor, 50f, centerOffset)
-//                drawCircle(Color.White, 25f, centerOffset)
-//                drawCircle(needleColor, 20f, centerOffset)
+                drawCircle(mainColor, 50f, centerOffset)
+                drawCircle(Color.White, 25f, centerOffset)
+                drawCircle(needleColor, 20f, centerOffset)
 //
 //                // Draw markers and their text the 55 marker points
                 var counterPoint=0
@@ -281,7 +323,7 @@ fun SpeedometerComposeView(
                 val textPaint = android.graphics.Paint().apply {
                     color = movingSpeedTextColor.toArgb()
                     textSize = 80f // Adjust text size as needed
-                    isFakeBoldText = true // Make the text bold
+                    speedFont?.let { typeface = it } // Set custom font if not null
                 }
                 val currentSpeed="$currentSpeedValue Km/Hr"
                 val textWidth = textPaint.measureText(currentSpeed)

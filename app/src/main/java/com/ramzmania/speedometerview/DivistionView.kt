@@ -28,7 +28,7 @@ fun SpeedometerUiViewCompose() {
 
 
     var targetValue by remember { mutableStateOf(0f) }
-    var currentSpeed = remember(targetValue) { Animatable(initialValue = 200f) }
+    var currentSpeed = remember(targetValue) { Animatable(initialValue = 50f) }
 
 
 
@@ -57,6 +57,8 @@ fun SpeedometerUiViewCompose() {
                         id = R.color.white,
                     ),
                     movingSpeedTextColor = Color.White,
+                    arcWidth = 50f,
+                    gradientArc = true
                 )
 
             }
