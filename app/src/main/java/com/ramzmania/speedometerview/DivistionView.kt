@@ -40,7 +40,7 @@ fun SpeedometerUiViewCompose() {
                 .fillMaxHeight()
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
-                .background(color = colorResource(id = R.color.background_blue))
+                .background(color = colorResource(id = R.color.white))
         ) {
             Box(
                 modifier = Modifier
@@ -57,8 +57,7 @@ fun SpeedometerUiViewCompose() {
                         id = R.color.white,
                     ),
                     movingSpeedTextColor = Color.White,
-                    arcWidth = 50f,
-                    gradientArc = true
+                    arcWidth = 50f
                 )
 
             }

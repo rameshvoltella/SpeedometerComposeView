@@ -112,6 +112,8 @@ fun SpeedometerComposeView(
                 }
                 val centerArcSize = Size(w *0.9f, h *0.9f)
                 val centerArcStroke = Stroke(arcWidth, 0f, StrokeCap.Round)
+                val centerArcStroke3 = Stroke(arcWidth+10f, 0f, StrokeCap.Round)
+
                 val centerGradientArcStroke = Stroke(arcWidth-(arcWidth/2), 0f, StrokeCap.Round)
 
                 // Draw the background arc
@@ -156,8 +158,28 @@ fun SpeedometerComposeView(
                         false,
                         topLeft = quarterOffset,
                         size = centerArcSize,
+                        style = centerArcStroke3,
+                        alpha = 0.3f
+                    )
+                    drawArc(
+                        mainColor,
+                        startArcAngle,
+                        (degreesMarkerStep * progress).toFloat(),
+                        false,
+                        topLeft = quarterOffset,
+                        size = centerArcSize,
                         style = centerArcStroke
                     )
+
+//                    drawArc(
+//                        brush = Brush.verticalGradient(listOf(Color.Red, Color.Green, Color.Blue)),
+//                        startArcAngle,
+//                        (degreesMarkerStep * progress).toFloat(),
+//                        false,
+//                        topLeft = quarterOffset,
+//                        size = centerArcSize,
+//                        style = centerArcStroke
+//                    )
                 }
 
 
