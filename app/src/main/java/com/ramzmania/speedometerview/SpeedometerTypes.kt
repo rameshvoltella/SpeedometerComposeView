@@ -256,7 +256,7 @@ fun SpeedometerUiViewCompose() {
                 Column {
                     Spacer(modifier = Modifier.height(16.dp)) // Adjust the height as needed for the top margin
                     SpeedometerComposeView(
-                        speedMeterMaxRange = 220,
+                        speedMeterMaxRange = 80,
                         currentSpeedValue = speedOver.value.toInt(),
                         needleColor = Color.Red,
                         speedTextColor = colorResource(

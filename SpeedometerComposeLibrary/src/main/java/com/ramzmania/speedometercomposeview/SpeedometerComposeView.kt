@@ -68,7 +68,12 @@ fun SpeedometerComposeView(
     glowMulticolor:Boolean=true,
     glowSingleColor: Color = Color(0xFF388E3C),
     glowRadius:Float=28f,
-    glowSpeedPoints:Boolean=false
+    glowSpeedPoints:Boolean=false,
+    baseArcColorConstant:Color?=null,
+    needleCircleColor:Color?=null,
+    needleIndicatorColor:Color?=null,
+    needleSemiIndicatorColor:Color=Color.White,
+    movingSpeedTextExtraPadding:Float=14f
 ) {
 
     // Constants for drawing the speedometer
@@ -126,7 +131,7 @@ fun SpeedometerComposeView(
 
                 // Draw the background arc
                 drawArc(
-                    secondaryColor,
+                    baseArcColorConstant ?: secondaryColor,
                     startArcAngle,
                     arcDegrees.toFloat(),
                     false,
@@ -247,8 +252,8 @@ fun SpeedometerComposeView(
 
 
                 // Draw circles for the center and needle
-                drawCircle(mainColor, 50f, centerOffset)
-                drawCircle(Color.White, 25f, centerOffset)
+                drawCircle(needleCircleColor ?: mainColor, 50f, centerOffset)
+                drawCircle(needleSemiIndicatorColor, 25f, centerOffset)
                 drawCircle(needleColor, 20f, centerOffset)
 //
 //                // Draw markers and their text the 55 marker points
@@ -257,7 +262,7 @@ fun SpeedometerComposeView(
                     val lineEndX = 100f
                     val lineEndY =
                         h / 2f // Since line is horizontal, lineEndY is the same as the center of the canvas vertically
-                    paint.color = mainColor
+                    paint.color = needleIndicatorColor ?: mainColor
 
                     val lineStartX = if (counter % 5 == 0) {
                         paint.strokeWidth = 3f
@@ -340,7 +345,7 @@ fun SpeedometerComposeView(
                         var textY = lineEndY + 10f
                         if(text>99)
                         {
-                            textY += 14f
+                            textY += movingSpeedTextExtraPadding
                         }
                         /*Rotate canvas so that the point perfectly pad with the circle*/
                         when {
