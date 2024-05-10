@@ -85,7 +85,10 @@ fun SpeedometerUiViewCompose() {
     var speedoMeterMode by remember {
         mutableStateOf(Mode.NORMAL)
     }
-
+    val nullColor:Color?=null
+ var basicArcColor by remember {
+     mutableStateOf(nullColor)
+ }
 
     val fusedLocationClient = remember {
         LocationServices.getFusedLocationProviderClient(
@@ -255,23 +258,26 @@ fun SpeedometerUiViewCompose() {
             ) {
                 Column {
                     Spacer(modifier = Modifier.height(16.dp)) // Adjust the height as needed for the top margin
-                    SpeedometerComposeView(
-                        speedMeterMaxRange = 80,
-                        currentSpeedValue = speedOver.value.toInt(),
-                        needleColor = Color.Red,
-                        speedTextColor = colorResource(
-                            id = R.color.white,
-                        ),
-                        movingSpeedTextColor = Color.White,
-                        arcWidth = 50f,
-                        speedometerMode = speedoMeterMode,
-                        glowMulticolor = false,
-                        glowSingleColor = Color.Red,
-                        speedFont = currentSpeedTypeFace,
-                        speedometerNumberFont = currentSpeedometerNumberTypeFace,
-                        glowRadius = 28f,
-                        glowSpeedPoints = glowPoints
-                    )
+
+                        SpeedometerComposeView(
+                            speedMeterMaxRange = 80,
+                            currentSpeedValue = speedOver.value.toInt(),
+                            needleColor = Color.Red,
+                            speedTextColor = colorResource(
+                                id = R.color.white,
+                            ),
+                            movingSpeedTextColor = Color.White,
+                            arcWidth = 50f,
+                            speedometerMode = speedoMeterMode,
+                            glowMulticolor = false,
+                            glowSingleColor = Color.Red,
+                            speedFont = currentSpeedTypeFace,
+                            speedometerNumberFont = currentSpeedometerNumberTypeFace,
+                            glowRadius = 28f,
+                            glowSpeedPoints = glowPoints,
+                            baseArcColorConstant = basicArcColor
+                        )
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -291,6 +297,7 @@ fun SpeedometerUiViewCompose() {
                                 currentSpeedometerNumberTypeFace = typeFaceNUll
                                 currentSpeedTypeFace = typeFaceNUll
                                 glowPoints=false
+                                basicArcColor=nullColor
                             }
                         ) {
                             Box(
@@ -321,7 +328,9 @@ fun SpeedometerUiViewCompose() {
                             onClick = { speedoMeterMode = Mode.GLOW
                                 currentSpeedometerNumberTypeFace = speedometerNumberFont
                                 currentSpeedTypeFace = speedNumberFont
-                                glowPoints=true}
+                                glowPoints=true
+                                basicArcColor= Color(0x33FF0000)
+                            }
 
                         ) {
                             Box(
@@ -352,7 +361,8 @@ fun SpeedometerUiViewCompose() {
                             onClick = { speedoMeterMode = Mode.NEON
                                 currentSpeedometerNumberTypeFace = speedometerNumberFont
                                 currentSpeedTypeFace = typeFaceNUll
-                                glowPoints=true}
+                                glowPoints=true
+                                basicArcColor= Color(0x33FF0000)}
                         ) {
                             Box(
                                 modifier = Modifier
@@ -378,7 +388,9 @@ fun SpeedometerUiViewCompose() {
                             onClick = { speedoMeterMode = Mode.GRADIENT
                                 currentSpeedometerNumberTypeFace = typeFaceNUll
                                 currentSpeedTypeFace = speedNumberFont
-                                glowPoints=true}
+                                glowPoints=true
+                                basicArcColor=nullColor
+                            }
 
                         ) {
                             Box(

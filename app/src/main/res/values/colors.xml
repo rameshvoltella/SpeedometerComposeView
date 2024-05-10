@@ -18,4 +18,5 @@
     <color name="default_blue_light">#ff33b5e5</color>
     <color name="indicator_color">#4189fe</color>
     <color name="secondary_arc_background">#40FFFFFF</color>
+    <color name="transparent_red">#33FF0000</color>
 </resources>

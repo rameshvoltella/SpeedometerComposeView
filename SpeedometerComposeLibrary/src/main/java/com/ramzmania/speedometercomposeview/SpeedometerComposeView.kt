@@ -5,6 +5,7 @@ package com.ramzmania.speedometercomposeview
  * Certificate of Authenticity: This code is authored by Ramesh M Nair.
  * Date: 08/06/2024
  * Description: This code provides a custom Composable function to render a speedometer view using Jetpack Compose.
+ * https://jitpack.io/#rameshvoltella/SpeedometerComposeView/3.0.0
  */
 import android.graphics.Typeface
 import androidx.compose.foundation.Canvas
