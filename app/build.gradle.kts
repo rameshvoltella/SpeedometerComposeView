@@ -67,6 +67,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation(project(":SpeedometerComposeLibrary"))
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+    implementation ("com.google.accompanist:accompanist-permissions:0.34.0")
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.23.0")
 //    implementation("com.github.rameshvoltella:SpeedometerComposeView:1.0.0")
 //[![](https://jitpack.io/v/rameshvoltella/SpeedometerComposeView.svg)](https://jitpack.io/#rameshvoltella/SpeedometerComposeView)
 }
