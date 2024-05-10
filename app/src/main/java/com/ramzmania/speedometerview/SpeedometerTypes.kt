@@ -537,3 +537,37 @@ fun SpeedometerUiViewCompose() {
 fun PreviewSpeedometer() {
     SpeedometerUiViewCompose()
 }
+
+/*
+
+Column(
+modifier = Modifier.fillMaxSize(),
+verticalArrangement = Arrangement.Center,
+horizontalAlignment = Alignment.CenterHorizontally
+) {
+    Spacer(modifier = Modifier.height(16.dp)) // Adjust the height as needed for the top margin
+    Box(
+        modifier = Modifier
+            .width(450.dp)
+            .height(450.dp)
+            .fillMaxSize() // Center the Box within the Column
+    ) {
+        SpeedometerComposeView(
+            speedMeterMaxRange = 80,
+            currentSpeedValue = speedOver.value.toInt(),
+            needleColor = Color.Red,
+            speedTextColor = colorResource(
+                id = R.color.white,
+            ),
+            movingSpeedTextColor = Color.White,
+            arcWidth = 50f,
+            speedometerMode = speedoMeterMode,
+            glowMulticolor = false,
+            glowSingleColor = Color.Red,
+            speedFont = currentSpeedTypeFace,
+            speedometerNumberFont = currentSpeedometerNumberTypeFace,
+            glowRadius = 28f,
+            glowSpeedPoints = glowPoints,
+            baseArcColorConstant = basicArcColor
+        )
+    }*/
