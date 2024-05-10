@@ -1,8 +1,7 @@
 # SpeedometerComposeView
-
-This is a speedometer compose view
-
 This widget is drawn using Compose API only, which makes it work on all platforms that support Compose UI.
+Speedometer widget for Compose. **amazing**, **powerful**, and _multi shape_ :zap: , you can change (colors, bar width, shape, text, font ...everything !!),
+[see project on GitHub](https://github.com/rameshvoltella/SpeedometerComposeView).
 
 [![Jit Pack](https://jitpack.io/v/rameshvoltella/SpeedometerComposeView.svg)](https://jitpack.io/#rameshvoltella/SpeedometerComposeView)
 [![API](https://img.shields.io/badge/API-+21-red.svg?style=flat)](#)
@@ -36,7 +35,7 @@ Then, add the speedometer dependencies according to your project:
 
 ## Compose To Your Project
 
-Go to `build.gradle.kts` file in the **shared module**. In `commonMain` dependencies:
+Go to `build.gradle.kts`
 
 ```kotlin
 dependencies {
