@@ -27,6 +27,10 @@ Current speedometers available:
 1. Download the APK file from
    here [DOWNLOAD](https://github.com/rameshvoltella/SpeedometerComposeView/raw/main/appfiles/SpeedometerCompose_v3.apk)
 
+## Video Preview
+
+Full Mode-> https://www.youtube.com/shorts/ZCHQigQF8ac
+Glow Mode-> https://www.youtube.com/shorts/3mPNlcWVTmw
 
 Requirements to use:
 
