@@ -10,8 +10,8 @@ Speedometer widget for Compose. **amazing**, **powerful**, and _multi shape_ :za
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
 <div style="text-align: center;">
         <h3>SPEEDOMETER</h3>
-        <img src="https://github.com/rameshvoltella/SpeedometerComposeView/blob/main/appfiles/normal.jpeg?raw=true" alt="Tracker OFF" style="width: 40%; height: 40%;">
-        <img src="https://github.com/rameshvoltella/SpeedometerComposeView/blob/main/appfiles/glow.jpeg?raw=true" alt="Tracker ON" style="width: 40%; height: 40%;">
+        <img src="appfiles/normal.jpeg" alt="normal" style="width: 40%; height: 40%;">
+        <img src="appfiles/glow.jpeg" alt="glow" style="width: 40%; height: 40%;">
     </div>
 </div>
 
@@ -21,6 +21,12 @@ Current speedometers available:
 |              Normal              |              GLOW              |              NEON              |              GRADIENT              |
 |:--------------------------------:|:------------------------------:|:------------------------------:|:----------------------------------:|
 | <img src="images/normal.jpeg" /> | <img src="images/glow.jpeg" /> | <img src="images/neon.jpeg" /> | <img src="images/gradient.jpeg" /> |
+
+### Downloads
+
+1. Download the APK file from
+   here [DOWNLOAD](https://github.com/rameshvoltella/SpeedometerComposeView/tags)
+
 
 Requirements to use:
 
@@ -331,4 +337,17 @@ Column(
     }
 }
 ```
+## MY GITHUB TROPHY
+
+[![trophy](https://github-profile-trophy.vercel.app/?username=rameshvoltella)](https://github.com/ryo-ma/github-profile-trophy)
+
+## Contributing
+
+I am welcome contributions from the community to improve the SpeedometerComposeView
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/improvement`).
+3. Make your changes and commit them (`git commit -am 'Add feature/improvement'`).
+4. Push to the branch (`git push origin feature/improvement`).
+5. Create a new Pull Request.
 
