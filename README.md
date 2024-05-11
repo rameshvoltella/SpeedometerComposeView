@@ -1,6 +1,6 @@
 # SpeedometerComposeView
 This widget is drawn using Compose API only, which makes it work on all platforms that support Compose UI.
-Speedometer widget for Compose. **amazing**, **powerful**, and _multi shape_ :zap: , you can change (colors, bar width, shape, text, font ...everything !!),
+Speedometer widget for Compose is an **amazing**, **powerful**, and _multi shape_ :zap: , you can change (colors, bar width, shape, text, font ...everything !!),
 [see project on GitHub](https://github.com/rameshvoltella/SpeedometerComposeView).
 
 [![Jit Pack](https://jitpack.io/v/rameshvoltella/SpeedometerComposeView.svg)](https://jitpack.io/#rameshvoltella/SpeedometerComposeView)
@@ -25,7 +25,7 @@ Current speedometers available:
 ### Downloads
 
 1. Download the APK file from
-   here [DOWNLOAD](https://github.com/rameshvoltella/SpeedometerComposeView/tags)
+   here [DOWNLOAD](https://github.com/rameshvoltella/SpeedometerComposeView/raw/main/appfiles/SpeedometerCompose_v3.apk)
 
 
 Requirements to use:
