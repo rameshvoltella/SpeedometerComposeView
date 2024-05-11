@@ -33,17 +33,34 @@ import androidx.compose.ui.unit.dp
 /**
  * Composable function to render a speedometer view.
  *
- * @param currentSpeedValue The current speed value.
+ * @param currentSpeedValue The current speed value to be displayed on the speedometer.
  * @param speedMeterMaxRange The maximum range of the speedometer.
- * @param startColorRange The start color of the speedometer range.
- * @param startColorRangeSecondary The secondary start color of the speedometer range.
- * @param mediumColorRange The medium color of the speedometer range.
- * @param mediumColorRangeSecondary The secondary medium color of the speedometer range.
- * @param endColorRange The end color of the speedometer range.
- * @param endColorRangeSecondary The secondary end color of the speedometer range.
- * @param needleColor The color of the speedometer needle.
- * @param speedTextColor The color of the speed text.
+ * @param startColorRange The start color of the primary range of the speedometer.
+ * @param startColorRangeSecondary The secondary start color of the primary range of the speedometer, used for gradient effect.
+ * @param mediumColorRange The color of the medium range of the speedometer.
+ * @param mediumColorRangeSecondary The secondary color of the medium range of the speedometer, used for gradient effect.
+ * @param endColorRange The end color of the primary range of the speedometer.
+ * @param endColorRangeSecondary The secondary end color of the primary range of the speedometer, used for gradient effect.
+ * @param needleColor The color of the needle indicating the current speed.
+ * @param speedTextColor The color of the static speed text.
  * @param movingSpeedTextColor The color of the moving speed text.
+ * @param speedFont The font type for the speed text.
+ * @param speedometerNumberFont The font type for the speedometer numbers.
+ * @param arcWidth The width of the arc representing the speedometer.
+ * @param speedometerMode The mode of the speedometer, NORMAL or COMPACT.
+ * @param gradientColorList The list of colors for creating a gradient effect on the speedometer arc.
+ * @param gradientType The type of gradient, HORIZONTAL or VERTICAL.
+ * @param neonColor The color of the neon effect on the speedometer arc.
+ * @param neonCenterColor The center color of the neon effect on the speedometer arc.
+ * @param glowMulticolor Flag indicating whether the glow effect should have multicolor or not.
+ * @param glowSingleColor The single color of the glow effect if multicolor is false.
+ * @param glowRadius The radius of the glow effect.
+ * @param glowSpeedPoints Flag indicating whether to display glow points on the speedometer indicating speed levels.
+ * @param baseArcColorConstant The base color of the speedometer arc.
+ * @param needleCircleColor The color of the circle at the center of the speedometer.
+ * @param needleIndicatorColor The color of the indicator at the tip of the needle.
+ * @param needleSemiIndicatorColor The color of the semi-transparent indicator around the needle.
+ * @param movingSpeedTextExtraPadding Extra padding for the moving speed text.
  */
 @Composable
 fun SpeedometerComposeView(
@@ -62,19 +79,19 @@ fun SpeedometerComposeView(
     speedometerNumberFont: Typeface? = null,
     arcWidth: Float = 20f,
     speedometerMode: Mode = Mode.NORMAL,
-    gradientColorList:List<Color> = listOf(startColorRange, mediumColorRange, endColorRange),
-    gradientType: GradientType=GradientType.HORIZONTAL,
-    neonColor: Color=Color.Red,
-    neonCenterColor:Color= Color.White,
-    glowMulticolor:Boolean=true,
+    gradientColorList: List<Color> = listOf(startColorRange, mediumColorRange, endColorRange),
+    gradientType: GradientType = GradientType.HORIZONTAL,
+    neonColor: Color = Color.Red,
+    neonCenterColor: Color = Color.White,
+    glowMulticolor: Boolean = true,
     glowSingleColor: Color = Color(0xFF388E3C),
-    glowRadius:Float=28f,
-    glowSpeedPoints:Boolean=false,
-    baseArcColorConstant:Color?=null,
-    needleCircleColor:Color?=null,
-    needleIndicatorColor:Color?=null,
-    needleSemiIndicatorColor:Color=Color.White,
-    movingSpeedTextExtraPadding:Float=14f
+    glowRadius: Float = 28f,
+    glowSpeedPoints: Boolean = false,
+    baseArcColorConstant: Color? = null,
+    needleCircleColor: Color? = null,
+    needleIndicatorColor: Color? = null,
+    needleSemiIndicatorColor: Color = Color.White,
+    movingSpeedTextExtraPadding: Float = 14f
 ) {
 
     // Constants for drawing the speedometer
@@ -140,8 +157,9 @@ fun SpeedometerComposeView(
                     size = centerArcSize,
                     style = centerArcStroke
                 )
-
+// This code snippet draws an arc on a canvas based on the selected mode.
                 when (speedometerMode) {
+                    // Normal mode: Draws a solid arc with a single color.
                     Mode.NORMAL -> {
                         drawArc(
                             mainColor,
@@ -153,21 +171,24 @@ fun SpeedometerComposeView(
                             style = centerArcStroke
                         )
                     }
+                    // Glow mode: Draws an arc with a glowing effect, potentially with multiple colors.
                     Mode.GLOW -> {
-                        var glowColor=mainColor;
-
-                        if(!glowMulticolor) {
-                            glowColor=glowSingleColor
+                        var glowColor = mainColor;
+                        // Check if the glowing effect should have a single color or multicolor.
+                        if (!glowMulticolor) {
+                            glowColor = glowSingleColor
                         }
 
-
+                        // Set up the paint for the glowing effect.
                         val frameworkPaint = paintGlow.asFrameworkPaint()
                         frameworkPaint.style = android.graphics.Paint.Style.STROKE
                         frameworkPaint.color = glowColor.toArgb()
                         frameworkPaint.strokeWidth = arcWidth
                         frameworkPaint.strokeCap = android.graphics.Paint.Cap.ROUND
                         //this is not in skia paint
+                        // Apply shadow layer for the glowing effect.
                         frameworkPaint.setShadowLayer(glowRadius, 0f, 0f, glowColor.toArgb())
+                        // Define the rectangle bounds for drawing the arc.
                         val width = centerArcSize.width
                         val height = centerArcSize.height
                         val rect = Rect(
@@ -176,6 +197,7 @@ fun SpeedometerComposeView(
                             right = w / 20f + width,
                             bottom = h / 20f + height
                         )
+                        // Draw the glowing arc.
                         canvas.drawArc(
                             rect = rect,
                             startArcAngle,
@@ -183,6 +205,7 @@ fun SpeedometerComposeView(
                             false,
                             paintGlow
                         )
+                        // Draw a solid arc over the glowing one to enhance visibility.
                         drawArc(
                             glowColor,
                             startArcAngle,
@@ -193,7 +216,9 @@ fun SpeedometerComposeView(
                             style = centerArcStroke
                         )
                     }
+                    // Neon mode: Draws an arc with a neon-like effect using radial gradient.
                     Mode.NEON -> {
+                        // Draw the main arc with a radial gradient.
                         drawArc(
                             Brush.radialGradient(
                                 listOf(neonColor.copy(.3f), neonColor, neonColor.copy(.3f)),
@@ -207,6 +232,7 @@ fun SpeedometerComposeView(
                             size = centerArcSize,
                             style = centerArcStroke
                         )
+                        // Draw a solid arc at the center to enhance the neon effect.
                         drawArc(
                             neonCenterColor,
                             startArcAngle,
@@ -217,28 +243,29 @@ fun SpeedometerComposeView(
                             style = centerGradientArcStroke
                         )
                     }
-                    Mode.GRADIENT -> {
 
-                        var brushGradient= if(gradientType==GradientType.HORIZONTAL)
-                        {
+                    Mode.GRADIENT -> {
+                        // Define the brush based on the gradient type.
+                        var brushGradient = if (gradientType == GradientType.HORIZONTAL) {
                             Brush.horizontalGradient(gradientColorList)
-                        }else if(gradientType==GradientType.LINEAR)
-                        {
+                        } else if (gradientType == GradientType.LINEAR) {
                             Brush.linearGradient(gradientColorList)
 
-                        }else if(gradientType==GradientType.RADIAL)
-                        {
+                        } else if (gradientType == GradientType.RADIAL) {
                             Brush.radialGradient(gradientColorList)
 
-                        }else if(gradientType==GradientType.VERTICAL)
-                        {
+                        } else if (gradientType == GradientType.VERTICAL) {
                             Brush.verticalGradient(gradientColorList)
+
+                        } else if (gradientType == GradientType.SWEEP) {
+                            Brush.sweepGradient(gradientColorList)
 
                         }else
                         {
-                            Brush.sweepGradient(gradientColorList)
+                            Brush.horizontalGradient(gradientColorList)
 
                         }
+                        // Draw the arc with the specified gradient.
                         drawArc(
                             brush = brushGradient,
                             startArcAngle,
@@ -328,14 +355,13 @@ fun SpeedometerComposeView(
                             speedometerNumberFont?.let { typeface = it }
                         }
 
-//                        val speedFrameworkPaint = textPaint
-                        if(glowSpeedPoints)
-                        {
+                        // Makes the number to glow if @param glowSpeedPoints is true
+                        if (glowSpeedPoints) {
 
                             textPaint.style = android.graphics.Paint.Style.STROKE
                             textPaint.color = speedTextColor.toArgb()
                             textPaint.strokeWidth = 3f
-                        //this is not in skia paint
+                            //this is not in skia paint
                             textPaint.setShadowLayer(glowRadius, 0f, 0f, speedTextColor.toArgb())
 
                         }
@@ -344,8 +370,7 @@ fun SpeedometerComposeView(
                         val marginLeft: Float
                         val textX: Float
                         var textY = lineEndY + 10f
-                        if(text>99)
-                        {
+                        if (text > 99) {
                             textY += movingSpeedTextExtraPadding
                         }
                         /*Rotate canvas so that the point perfectly pad with the circle*/
