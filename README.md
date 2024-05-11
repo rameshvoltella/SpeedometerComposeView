@@ -15,6 +15,13 @@ Speedometer widget for Compose. **amazing**, **powerful**, and _multi shape_ :za
     </div>
 </div>
 
+
+Current speedometers available:
+
+|              Normal              |              GLOW              |              NEON              |              GRADIENT              |
+|:--------------------------------:|:------------------------------:|:------------------------------:|:----------------------------------:|
+| <img src="images/normal.jpeg" /> | <img src="images/glow.jpeg" /> | <img src="images/neon.jpeg" /> | <img src="images/gradient.jpeg" /> |
+
 Requirements to use:
 
 - Minimum API version `21` 
@@ -217,6 +224,61 @@ SpeedometerComposeView(
     <td>Float</td>
   </tr>
 </table>
+
+## ARC MODES
+
+<table>
+  <tr>
+    <th>Mode</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>NORMAL</td>
+    <td>Draws a solid arc with a single color.</td>
+  </tr>
+  <tr>
+    <td>GLOW</td>
+    <td>Draws an arc with a glowing effect.</td>
+  </tr>
+  <tr>
+    <td>GRADIENT</td>
+    <td>Draws an arc with a gradient effect.</td>
+  </tr>
+  <tr>
+    <td>NEON</td>
+    <td>Draws an arc with a neon-like effect.</td>
+  </tr>
+</table>
+
+## GRADIENT ARC MODE - TYPES
+
+<table>
+  <tr>
+    <th>GradientType</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>LINEAR</td>
+    <td>Draws a linear gradient.</td>
+  </tr>
+  <tr>
+    <td>HORIZONTAL</td>
+    <td>Draws a horizontal gradient.</td>
+  </tr>
+  <tr>
+    <td>VERTICAL</td>
+    <td>Draws a vertical gradient.</td>
+  </tr>
+  <tr>
+    <td>RADIAL</td>
+    <td>Draws a radial gradient.</td>
+  </tr>
+  <tr>
+    <td>SWEEP</td>
+    <td>Draws a sweep gradient.</td>
+  </tr>
+</table>
+
 
 ## Speedometer using specific size
 
