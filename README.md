@@ -45,7 +45,7 @@ dependencies {
 
 ## USAGE
 
-This just a sample you can use however you want based on the argument sheet
+This just a sample you can use however you want based on the Parameters sheet below
 
 ```kotlin
 SpeedometerComposeView(

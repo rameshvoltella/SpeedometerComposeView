@@ -90,6 +90,10 @@ fun SpeedometerUiViewCompose() {
      mutableStateOf(nullColor)
  }
 
+    var semiIndicatorColor by remember {
+        mutableStateOf(Color.White)
+    }
+
     val fusedLocationClient = remember {
         LocationServices.getFusedLocationProviderClient(
             context
@@ -275,7 +279,10 @@ fun SpeedometerUiViewCompose() {
                             speedometerNumberFont = currentSpeedometerNumberTypeFace,
                             glowRadius = 28f,
                             glowSpeedPoints = glowPoints,
-                            baseArcColorConstant = basicArcColor
+                            baseArcColorConstant = basicArcColor,
+                            needleCircleColor = basicArcColor,
+                            needleIndicatorColor = basicArcColor,
+                            needleSemiIndicatorColor= semiIndicatorColor
                         )
 
                     Row(
@@ -298,6 +305,7 @@ fun SpeedometerUiViewCompose() {
                                 currentSpeedTypeFace = typeFaceNUll
                                 glowPoints=false
                                 basicArcColor=nullColor
+                                semiIndicatorColor=Color.White
                             }
                         ) {
                             Box(
@@ -330,6 +338,7 @@ fun SpeedometerUiViewCompose() {
                                 currentSpeedTypeFace = speedNumberFont
                                 glowPoints=true
                                 basicArcColor= Color(0x33FF0000)
+                                semiIndicatorColor=Color(0x33FF0000)
                             }
 
                         ) {
@@ -362,7 +371,8 @@ fun SpeedometerUiViewCompose() {
                                 currentSpeedometerNumberTypeFace = speedometerNumberFont
                                 currentSpeedTypeFace = typeFaceNUll
                                 glowPoints=true
-                                basicArcColor= Color(0x33FF0000)}
+                                basicArcColor= Color(0x33FF0000)
+                                semiIndicatorColor= Color(0x33FF0000)}
                         ) {
                             Box(
                                 modifier = Modifier
@@ -390,6 +400,7 @@ fun SpeedometerUiViewCompose() {
                                 currentSpeedTypeFace = speedNumberFont
                                 glowPoints=true
                                 basicArcColor=nullColor
+                                semiIndicatorColor= Color.White
                             }
 
                         ) {
