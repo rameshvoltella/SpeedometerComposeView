@@ -30,6 +30,7 @@ Current speedometers available:
 ## Video Preview
 
 Full Mode-> https://www.youtube.com/shorts/ZCHQigQF8ac
+
 Glow Mode-> https://www.youtube.com/shorts/3mPNlcWVTmw
 
 Requirements to use:
