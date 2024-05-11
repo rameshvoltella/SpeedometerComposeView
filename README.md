@@ -43,6 +43,31 @@ dependencies {
 }
 ```
 
+## USAGE
+
+This just a sample you can use however you want based on the argument sheet
+
+```kotlin
+SpeedometerComposeView(
+    speedMeterMaxRange = 220,
+    currentSpeedValue = 80,
+    needleColor = Color.Red,
+    speedTextColor = colorResource(
+        id = R.color.white,
+    ),
+    movingSpeedTextColor = Color.White,
+    arcWidth = 50f,
+    speedometerMode = Mode.NORMAL,
+    glowMulticolor = false,
+    glowSingleColor = Color.Red,
+    speedFont = ResourcesCompat.getFont(context, R.font.font_speed),
+    speedometerNumberFont = ResourcesCompat.getFont(context, R.font.font_speed_digits),
+    glowRadius = 28f,
+    glowSpeedPoints = true,
+    baseArcColorConstant = Color(0x33FF0000)
+)
+```
+
 ## Parameters
 
 <table>
@@ -193,4 +218,55 @@ dependencies {
   </tr>
 </table>
 
+## Speedometer using specific size
+
+Sometimes there may size issue in that case you can use a box to specific size
+
+```kotlin
+Column(
+    modifier = Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+) {
+    // Spacer for top margin
+    Spacer(modifier = Modifier.height(16.dp))
+
+    // Title
+    Text(
+        text = "Speedometer using specific size",
+        style = TextStyle(
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp
+        )
+    )
+
+    // Spacer for vertical space between title and SpeedometerComposeView
+    Spacer(modifier = Modifier.height(16.dp))
+
+    // SpeedometerComposeView
+    Box(
+        modifier = Modifier
+            .width(450.dp)
+            .height(450.dp)
+            .fillMaxSize() // Center the Box within the Column
+    ) {
+        SpeedometerComposeView(
+            speedMeterMaxRange = 80,
+            currentSpeedValue = speedOver.value.toInt(),
+            needleColor = Color.Red,
+            speedTextColor = colorResource(id = R.color.white),
+            movingSpeedTextColor = Color.White,
+            arcWidth = 50f,
+            speedometerMode = speedoMeterMode,
+            glowMulticolor = false,
+            glowSingleColor = Color.Red,
+            speedFont = currentSpeedTypeFace,
+            speedometerNumberFont = currentSpeedometerNumberTypeFace,
+            glowRadius = 28f,
+            glowSpeedPoints = glowPoints,
+            baseArcColorConstant = basicArcColor
+        )
+    }
+}
+```
 
